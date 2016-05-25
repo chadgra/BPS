@@ -1,10 +1,10 @@
-ProjectTemplate
+BPS
 ================
 A template for C# projects. This will help so that all our projects are started the same way, using the same tools.
 
 ## Usage
 1. Clone this repository
-2. Change the name of the "ProjectTemplate" folder to the name of your new project.
+2. Change the name of the "BPS" folder to the name of your new project.
 3. Change the name of the .sln and .sln.DotSettings file to the name of your new project.
 4. Open the solution, and then the properties of the "View" project. Change the "Assembly name" to the name of your new project.
 5. Change the "Title" resource of the MainWindowView.resx file to the name of your project.

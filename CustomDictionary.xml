@@ -573,6 +573,7 @@
     </Words>
     <Acronyms>
         <CasingExceptions>
+            <Acronym>BPS</Acronym>
             <Acronym>Pv</Acronym>
             <!-- IPv4, IPv6 -->
             <Acronym>Pi</Acronym>
