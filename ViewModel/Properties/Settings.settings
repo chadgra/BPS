@@ -2,11 +2,17 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="ViewModel.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="TestData" Type="System.String" Scope="User">
+    <Setting Name="PortName" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="SelectedSupportedCulture" Type="System.Globalization.CultureInfo" Scope="User">
       <Value Profile="(Default)">en-US</Value>
+    </Setting>
+    <Setting Name="BluetoothAddresses" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="DiscoveryTimeout" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
     </Setting>
   </Settings>
 </SettingsFile>

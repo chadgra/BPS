@@ -98,11 +98,11 @@ namespace ViewModelTestProject
             var mainWindowViewModel1 = new MainWindowViewModel(null, null, null);
 
             // Set a value to clear out the previous value.
-            mainWindowViewModel1.TestData = "first value";
-            mainWindowViewModel1.TestData = "second value";
+            mainWindowViewModel1.PortName = "first value";
+            mainWindowViewModel1.PortName = "second value";
 
             var mainWindowViewModel2 = new MainWindowViewModel(null, null, null);
-            Assert.AreEqual(mainWindowViewModel1.TestData, mainWindowViewModel2.TestData);
+            Assert.AreEqual(mainWindowViewModel1.PortName, mainWindowViewModel2.PortName);
         }
 
         #endregion
@@ -124,12 +124,12 @@ namespace ViewModelTestProject
                     propertyEvents++;
                 };
 
-            mainWindowViewModel.TestData = null;
-            Assert.AreEqual(null, mainWindowViewModel.TestData);
-            mainWindowViewModel.TestData = string.Empty;
-            Assert.AreEqual(null, mainWindowViewModel.TestData);
-            mainWindowViewModel.TestData = TestData;
-            Assert.AreEqual(TestData, mainWindowViewModel.TestData);
+            mainWindowViewModel.PortName = null;
+            Assert.AreEqual(null, mainWindowViewModel.PortName);
+            mainWindowViewModel.PortName = string.Empty;
+            Assert.AreEqual(null, mainWindowViewModel.PortName);
+            mainWindowViewModel.PortName = TestData;
+            Assert.AreEqual(TestData, mainWindowViewModel.PortName);
             Assert.AreEqual(3, propertyEvents);
         }
 
@@ -144,9 +144,8 @@ namespace ViewModelTestProject
         public void DoSomethingTest()
         {
             var mainWindowViewModel = new MainWindowViewModel(null, null, this.dialogServicesMock.Object);
-            mainWindowViewModel.TestData = "0123456789";
-            mainWindowViewModel.DoSomething();
-            Assert.AreEqual("9876543210", mainWindowViewModel.TestData);
+            mainWindowViewModel.PortName = "0123456789";
+            Assert.AreEqual("0123456789", mainWindowViewModel.PortName);
             this.dialogServicesMock.Verify(
                 dsm => dsm.ShowDialog(
                     It.Is<MessageBoxViewModel>(
@@ -161,8 +160,7 @@ namespace ViewModelTestProject
         public void DoSomethingExceptionTest()
         {
             var mainWindowViewModel = new MainWindowViewModel(null, null, null);
-            mainWindowViewModel.TestData = null;
-            mainWindowViewModel.DoSomething();
+            mainWindowViewModel.PortName = null;
         }
 
         /// <summary>

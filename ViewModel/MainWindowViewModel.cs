@@ -41,7 +41,11 @@ namespace ViewModel
             this.DialogServices = dialogServices;
 
             // Initialize the data from the settings.
-            this.TestData = this.TestData;
+            this.PortName = this.PortName;
+            this.BluetoothAddresses = this.BluetoothAddresses;
+            this.DiscoveryTimeout = this.DiscoveryTimeout;
+
+            this.InitializeAtPort();
         }
 
         #endregion
@@ -80,20 +84,63 @@ namespace ViewModel
         }
 
         /// <summary>
-        /// Gets or sets some test data.
+        /// Gets or sets the port name.
         /// </summary>
-        public string TestData
+        public string PortName
         {
             get
             {
-                return this.settings.TestData;
+                return this.settings.PortName;
             }
 
             set
             {
-                this.settings.TestData = string.IsNullOrEmpty(value) ? null : value;
-                this.NotifyOfPropertyChange(() => this.TestData);
+                this.settings.PortName = string.IsNullOrEmpty(value) ? null : value;
+                this.NotifyOfPropertyChange(() => this.PortName);
             }
+        }
+
+        /// <summary>
+        /// Gets or sets the bluetooth addresses.
+        /// </summary>
+        public string BluetoothAddresses
+        {
+            get
+            {
+                return this.settings.BluetoothAddresses;
+            }
+
+            set
+            {
+                this.settings.BluetoothAddresses = string.IsNullOrEmpty(value) ? null : value;
+                this.NotifyOfPropertyChange(() => this.BluetoothAddresses);
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the discovery timeout.
+        /// </summary>
+        public int DiscoveryTimeout
+        {
+            get
+            {
+                return this.settings.DiscoveryTimeout;
+            }
+
+            set
+            {
+                this.settings.DiscoveryTimeout = value;
+                this.NotifyOfPropertyChange(() => this.DiscoveryTimeout);
+            }
+        }
+
+        /// <summary>
+        /// Gets the at port.
+        /// </summary>
+        public AtPort Port
+        {
+            get;
+            private set;
         }
 
         #endregion
@@ -101,13 +148,27 @@ namespace ViewModel
         #region Methods
 
         /// <summary>
-        /// Do something.
+        /// Initialize the at port and set the important settings.
         /// </summary>
-        public void DoSomething()
+        public void InitializeAtPort()
         {
-            this.TestData = new string(this.TestData.ToCharArray().Reverse().ToArray());
-            var messageBoxViewModel = new MessageBoxViewModel { Text = this.TestData };
-            this.DialogServices.ShowDialog(messageBoxViewModel);
+            this.Port = new AtPort(this.PortName, 115200);
+            this.Port.SendCommand("ATFRST");
+            this.Port.ReceiveEvent(1500);
+            this.Port.ReceiveEvent(1500);
+            this.Port.SendCommand("ATSDILE,1,0,0,0");
+            this.Port.ReceiveResponse();
+            this.Port.SendCommand("ATSDITLE," + this.DiscoveryTimeout + ",16,16");
+            this.Port.ReceiveResponse();
+
+            foreach (var address in this.BluetoothAddresses.Split(','))
+            {
+                this.Port.SendCommand("ATSWL," + address);
+                this.Port.ReceiveResponse();
+            }
+
+            this.Port.SendCommand("ATSDBLE,2,0");
+            this.Port.ReceiveResponse();
         }
 
         /// <summary>
