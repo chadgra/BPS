@@ -1,0 +1,15 @@
+﻿<UserControl x:Class="ViewUtilities.Tag"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vu="clr-namespace:ViewUtilities">
+    <Border Background="DarkGray" BorderBrush="DarkGray" CornerRadius="3" Margin="2">
+        <Grid VerticalAlignment="Top" Background="Transparent">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <vu:EditableTextBlock Grid.Column="0" x:Name="EditableTextBlock" Height="23" Text="{Binding Text, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" VerticalAlignment="Top" FontSize="10" VerticalContentAlignment="Top" TextChanged="EditableTextBlockOnTextChanged" />
+            <Button Grid.Column="1" x:Name="DeleteButton" Click="OnDeleteButtonClick" Style="{StaticResource CloseButton}" />
+        </Grid>
+    </Border>
+</UserControl>

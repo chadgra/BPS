@@ -1,0 +1,21 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:vu="clr-namespace:ViewUtilities"
+                    xmlns:d="clr-namespace:ViewUtilities.Dialogs">
+    <Style TargetType="TextBlock" x:Key="TextBlockService">
+        <Setter Property="Margin" Value="3" />
+        <Style.Triggers>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="vu:TextBlockService.AutomaticToolTipEnabled" Value="True" />
+                    <Condition Property="vu:TextBlockService.IsTextTrimmed" Value="True" />
+                </MultiTrigger.Conditions>
+                <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=Text}" />
+            </MultiTrigger>
+        </Style.Triggers>
+    </Style>
+    <d:FolderBrowserDialogPresenter x:Key="{x:Type d:FolderBrowserDialogViewModel}" />
+    <d:MessageBoxPresenter x:Key="{x:Type d:MessageBoxViewModel}" />
+    <d:OpenFileDialogPresenter x:Key="{x:Type d:OpenFileDialogViewModel}" />
+    <d:SaveFileDialogPresenter x:Key="{x:Type d:SaveFileDialogViewModel}" />
+</ResourceDictionary>
